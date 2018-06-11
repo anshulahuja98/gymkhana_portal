@@ -1,6 +1,5 @@
 import factory
 import random
-from PIL import Image
 
 SKILL = ['machinist', 'pipefitter', 'welder', 'tool and die maker', 'boilermaker',
          'millwright', 'ironworker', 'plumber', 'electrician', 'auto mechanic',
