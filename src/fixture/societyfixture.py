@@ -2,6 +2,10 @@ import factory
 import random
 from fixture.userfixture import UserProfileFactory
 
+COLOUR = ["yellow", "black", "purple", "red", "orange", "green", '#084594', '#2171b5', '#4292c6', '#6baed6', '#9ecae1',
+          '#c6dbef', '#deebf7', '#f7fbff'
+          ]
+
 
 class SocietyFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -10,7 +14,7 @@ class SocietyFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('sentence', nb_words=4)
     description = factory.Faker('sentence', nb_words=30)
-    # cover = VersatileImageField('Cover', upload_to='society_%Y', help_text="Upload high quality picture")
+    cover = factory.django.ImageField(color=random.choice(COLOUR))
     # skin = models.CharField(max_length=32, choices=SKIN_CHOICES, blank=True, default='mdb-skin',
     secretary = factory.SubFactory(UserProfileFactory)
     joint_secretary = factory.SubFactory(UserProfileFactory)
