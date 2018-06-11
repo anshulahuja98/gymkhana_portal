@@ -1,6 +1,7 @@
 import factory
 import random
 from fixture.userfixture import UserProfileFactory
+from fixture.facultyadvisorfixture import FacultyAdvisorFactory
 
 COLOUR = ["yellow", "black", "purple", "red", "orange", "green", '#084594', '#2171b5', '#4292c6', '#6baed6', '#9ecae1',
           '#c6dbef', '#deebf7', '#f7fbff'
@@ -22,7 +23,7 @@ class SocietyFactory(factory.django.DjangoModelFactory):
     secretary = factory.SubFactory(UserProfileFactory)
     joint_secretary = factory.SubFactory(UserProfileFactory)
     mentor = factory.SubFactory(UserProfileFactory)
-    # faculty_advisor = models.ForeignKey(FacultyAdvisor, blank=True, null=True, default=None,
+    faculty_advisor = factory.SubFactory(FacultyAdvisorFactory)
     # gallery = models.ForeignKey(Gallery, blank=True, null=True, on_delete=models.SET_NULL,
     custom_html = factory.Faker('sentence', nb_words=20)
     slug = factory.Sequence(lambda n: 'soc-%d' % n)
