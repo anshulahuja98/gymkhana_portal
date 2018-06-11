@@ -15,16 +15,11 @@ class Command(BaseCommand):
         self.create_fixtures()
 
     def create_fixtures(self):
-        # self.create_objects(UserProfileFactory, 50)
-        # self.create_objects(SocietyFactory)
-        # self.create_objects(ClubFactory, 10)
         self.create_objects(ActivityFactory)
         self.create_objects(EventFactory)
         self.create_objects(FestivalFactory, 4)
-        # self.create_objects(SenateFactory, 1)
         self.create_objects(SenateMembershipFactory)
         self.create_objects(ContactFactory)
-        # self.create_objects(TopicFactory)
         self.create_objects(AnswerFactory, 20)
 
     @staticmethod
