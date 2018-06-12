@@ -1,10 +1,9 @@
 from django.core.management.base import BaseCommand
-
 from fixture.activityfixture import ActivityFactory
 from fixture.contactfixture import ContactFactory
 from fixture.eventfixture import EventFactory
 from fixture.festivalfixture import FestivalFactory
-from fixture.senatemembershipfixture import SenateMembershipFactory
+from fixture.senatemembershipfixture import MemberWithSenateFactory
 from fixture.answerfixture import AnswerFactory
 from fixture.topicfixture import TopicFactory
 from fixture.clubfixture import ClubFactory
@@ -23,8 +22,7 @@ class Command(BaseCommand):
         self.create_objects(EventFactory)
         self.create_objects(FestivalFactory, 4)
         self.create_objects(ClubFactory, m2m=True)
-        # self.create_objects(SenateFactory, m2m=True)
-        self.create_objects(SenateMembershipFactory)
+        self.create_objects(MemberWithSenateFactory)
         self.create_objects(ContactFactory)
         self.create_objects(AnswerFactory, 20, m2m=True)
         self.create_objects(TopicFactory, 5, m2m=True)
