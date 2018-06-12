@@ -6,6 +6,10 @@ from fixture.eventfixture import EventFactory
 from fixture.festivalfixture import FestivalFactory
 from fixture.senatemembershipfixture import SenateMembershipFactory
 from fixture.answerfixture import AnswerFactory
+from fixture.topicfixture import TopicFactory
+from fixture.clubfixture import ClubFactory
+import random
+from main.models import UserProfile
 
 
 class Command(BaseCommand):
@@ -18,14 +22,24 @@ class Command(BaseCommand):
         self.create_objects(ActivityFactory)
         self.create_objects(EventFactory)
         self.create_objects(FestivalFactory, 4)
+        self.create_objects(ClubFactory, m2m=True)
+        # self.create_objects(SenateFactory, m2m=True)
         self.create_objects(SenateMembershipFactory)
         self.create_objects(ContactFactory)
-        self.create_objects(AnswerFactory, 20)
+        self.create_objects(AnswerFactory, 20, m2m=True)
+        self.create_objects(TopicFactory, 5, m2m=True)
 
     @staticmethod
-    def create_objects(klass=None, object_count=5):
-        if klass is not None:
+    def create_objects(klass=None, object_count=5, m2m=False):
+        if klass is not None and m2m is False:
             for i in range(object_count):
                 klass.create()
+        elif klass is not None and m2m is True:
+            print("m2m")
+            for i in range(object_count):
+                multiple_users = (UserProfile.objects.get(roll='B16CS%d' % random.randint(0, 10)),
+                                  UserProfile.objects.get(roll='B16CS%d' % random.randint(10, 20)),
+                                  )
+                klass.create(users=multiple_users)
         else:
             raise ValueError("klass argument cannot be null")
